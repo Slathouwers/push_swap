@@ -6,7 +6,7 @@
 #    By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 14:26:03 by slathouw          #+#    #+#              #
-#    Updated: 2021/10/09 09:23:03 by slathouw         ###   ########.fr        #
+#    Updated: 2021/10/09 10:08:07 by slathouw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS	= -Wall -Wextra -Werror
 OBJDIR	= obj
 
 
-SOURCES	= 
+SOURCES	= push_swap.c
 SRCDIR 	= srcs
 SRCS 	= ${addprefix $(SRCDIR)/, $(SOURCES)}
 OBJS	= ${addprefix $(OBJDIR)/, $(SOURCES:.c=.o)}
@@ -29,9 +29,8 @@ all : 		${NAME}
 $(NAME) :	$(OBJS)
 	@make -C $(LIBFT)
 	@cp libftprintf/libftprintf.a .
-	@${CC} ${CFLAGS} -I ${INCLUDES} ${OBJDIR}/server.o libftprintf.a -o server
-	@${CC} ${CFLAGS} -I ${INCLUDES} ${OBJDIR}/client.o libftprintf.a -o client
-	@echo "Minitalk client and server binaries created!"
+	@${CC} ${CFLAGS} -I ${INCLUDES} ${OBJS} libftprintf.a -o ${NAME}
+	@echo "push_swap binary created!"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p obj
