@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/11 12:22:33 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/12 06:33:09 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	check_is_args_num(int argc, char **args)
 {
-	//TODO: implement
+	//TODO: implementP
 	(void) argc, (void) args;
 	return (1);
 }
 
 int	split_len(char **split)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	if (!split)
@@ -44,7 +44,7 @@ t_stack_el	*new_stack_el(int number)
 
 void	print_stack_el(void *el)
 {
-	if(el)
+	if (el)
 		ft_printf("num: %12i\thash: %i\n",
 			TO_EL_PTR(el)->number, TO_EL_PTR(el)->hash);
 }
@@ -60,9 +60,9 @@ t_stack	*parse_args(int argc, char **args)
 	int			number;
 
 	stack = NULL;
-	if(!check_is_args_num(argc, args))
-		return(NULL);
-	while(*args && argc-- > 0)
+	if (!check_is_args_num(argc, args))
+		return (NULL);
+	while (*args && argc-- > 0)
 	{
 		number = ft_atoi(*args++);
 		ft_lstadd_back(&stack, ft_lstnew(new_stack_el(number)));
