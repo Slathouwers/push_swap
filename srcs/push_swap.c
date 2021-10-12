@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/12 06:33:09 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/12 09:14:46 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ int	check_is_args_num(int argc, char **args)
 	//TODO: implementP
 	(void) argc, (void) args;
 	return (1);
+}
+
+int	get_bit(int number, int significance)
+{
+	return (number >> significance & 1);
 }
 
 int	split_len(char **split)
@@ -44,9 +49,13 @@ t_stack_el	*new_stack_el(int number)
 
 void	print_stack_el(void *el)
 {
+	int hash;
+
+	hash =  TO_EL_PTR(el)->hash;
 	if (el)
-		ft_printf("num: %12i\thash: %i\n",
-			TO_EL_PTR(el)->number, TO_EL_PTR(el)->hash);
+		ft_printf("num: %12i\thash: %3i\tBinary:%i%i%i%i\n",
+			TO_EL_PTR(el)->number, TO_EL_PTR(el)->hash,
+			get_bit(hash, 3), get_bit(hash, 2), get_bit(hash, 1), get_bit(hash, 0));
 }
 
 void	print_stack(t_stack *s)
@@ -142,6 +151,7 @@ int	idx_from_arr(int *arr, int n, int to_find)
 		;
 	return (i);
 }
+
 void print_arr(int *arr, int n)
 {
 	int i;
@@ -178,11 +188,79 @@ void	hash_el_to_index(t_stack *s)
 	}
 }
 
+int	is_sorted(t_stack *s)
+{
+	while (s && s->next)
+	{
+		if (S_EL_HASH(s) > S_EL_HASH(s->next))
+			return (0);
+		s = s->next;		
+	}
+	return (1);
+}
+
+t_stack	*rotate(t_stack *s)
+{
+	t_stack *tmp;
+
+	if (!s || !s->next)
+		return (s);
+	tmp = s;
+	s = tmp->next;
+	tmp->next = NULL;
+	ft_lstlast(s)->next = tmp;
+	return (s);
+}
+
+void	r(t_frame *f, char c)
+{
+	if (c == 'a')
+		f->st_a = rotate(f->st_a);
+	else
+		f->st_b = rotate(f->st_b);
+}
+
+t_stack	*rev_rotate(t_stack *s)
+{
+	t_stack *first;
+	t_stack *last;
+	t_stack	*sec_to_last;
+	
+	if(!s || !s->next)
+		return (s);
+	first = s;
+	while (s && s->next)
+	{
+		sec_to_last = s;
+		last = s->next;
+		s = s->next;
+	}
+	sec_to_last->next = NULL;
+	last->next = first;
+	return (last);
+}
+
+void	rr(t_frame *f, char c)
+{
+	if (c == 'a')
+		f->st_a = rev_rotate(f->st_a);
+	else
+		f->st_b = rev_rotate(f->st_b);
+}
+
+
 t_cmdlist	*sort(t_stack *stack_a)
 {
+	t_frame f;
+	
+	f.st_a = stack_a;
+	f.st_b = NULL;
 	//TODO: implement
 	hash_el_to_index(stack_a);
-	(void) stack_a;
+	
+	r(&f, 'a');
+	r(&f, 'a');
+	print_stack(f.st_a);
 	return (NULL);
 }
 
@@ -216,7 +294,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
  	cmds = sort(input_stack);
-	print_stack(input_stack);
+
+	 // TEST PRINT
+
 	if(!cmds)
 		return(1);
 	ft_printf("%s", cmds->cmd_str);
