@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:25:00 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/12 09:11:30 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/12 09:54:23 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ typedef struct s_cmdlist
 typedef struct s_frame
 {
 	t_stack		*st_a;
-	int			a_len;
+	int			a_to_sort;
 	t_stack		*st_b;
-	int			b_len;
+	int			b_to_sort;
 	t_cmdlist	*cmds;
 }				t_frame;
 
