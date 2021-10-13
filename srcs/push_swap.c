@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/12 14:45:19 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/13 20:05:52 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,14 @@ t_stack_el	*new_stack_el(int number)
 
 void	print_stack_el(void *el)
 {
-	int hash;
+	int	hash;
 
-	hash =  TO_EL_PTR(el)->hash;
+	hash = TO_EL_PTR(el)->hash;
 	if (el)
 		ft_printf("num: %12i\thash: %3i\tBinary:%i%i%i%i\n",
 			TO_EL_PTR(el)->number, TO_EL_PTR(el)->hash,
-			get_bit(hash, 3), get_bit(hash, 2), get_bit(hash, 1), get_bit(hash, 0));
+			get_bit(hash, 3), get_bit(hash, 2),
+			get_bit(hash, 1), get_bit(hash, 0));
 }
 
 void	print_stack(t_stack *s)
@@ -118,7 +119,7 @@ int	has_duplicates(t_stack *stack)
 void	swap(int *a, int *b)
 {
 	int	tmp;
-	
+
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
@@ -129,7 +130,7 @@ void	selection_sort(int *arr, int n)
 	int	i;
 	int	j;
 	int	min_index;
-	
+
 	i = -1;
 	while (++i < n - 1)
 	{
@@ -145,7 +146,7 @@ void	selection_sort(int *arr, int n)
 int	idx_from_arr(int *arr, int n, int to_find)
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < n && arr[i] != to_find)
 		;
@@ -154,7 +155,7 @@ int	idx_from_arr(int *arr, int n, int to_find)
 
 void print_arr(int *arr, int n)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < n)
@@ -163,8 +164,8 @@ void print_arr(int *arr, int n)
 
 void	hash_el_to_index(t_stack *s)
 {
-	int 	*numbers;
-	t_list *iter_ptr;
+	int		*numbers;
+	t_list	*iter_ptr;
 	int		n;
 	int		i;
 
@@ -194,14 +195,14 @@ int	is_sorted(t_stack *s)
 	{
 		if (S_EL_HASH(s) > S_EL_HASH(s->next))
 			return (0);
-		s = s->next;		
+		s = s->next;
 	}
 	return (1);
 }
 
 t_stack	*rotate(t_stack *s)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!s || !s->next)
 		return (s);
@@ -223,10 +224,10 @@ void	r(t_frame *f, char c)
 
 t_stack	*rev_rotate(t_stack *s)
 {
-	t_stack *first;
-	t_stack *last;
+	t_stack	*first;
+	t_stack	*last;
 	t_stack	*sec_to_last;
-	
+
 	if (!s || !s->next)
 		return (s);
 	first = s;
@@ -252,10 +253,10 @@ void	rr(t_frame *f, char c)
 
 void	push(t_stack **from, t_stack **to)
 {
-	t_stack *f;
-	t_stack *t;
-	t_stack *tmp;
-	
+	t_stack	*f;
+	t_stack	*t;
+	t_stack	*tmp;
+
 	f = (*from)->next;
 	tmp = *from;
 	tmp->next = *to;
@@ -275,24 +276,16 @@ void	p(t_frame *f, char c)
 
 void	radix_sort_el(t_frame *f, char from_stack, int hash_bit)
 {
-	char	dest_stack;
 	int		bit;
-	
+
 	if (from_stack == 'a')
 		bit = get_bit(S_EL_HASH(f->st_a), hash_bit);
 	else
 		bit = get_bit(S_EL_HASH(f->st_b), hash_bit);
 	if (bit == 0)
-		dest_stack = 'a';
-	else
-		dest_stack = 'b';
-	if (dest_stack == from_stack)
-		r(f, from_stack);
-	else
-	{
 		p(f, from_stack);
-		r(f, dest_stack);
-	}
+	else
+		r(f, from_stack);
 }
 
 int	max_hash_bit(int max_hash)
@@ -308,12 +301,12 @@ int	max_hash_bit(int max_hash)
 	return (len);
 }
 
-t_cmdlist	*sort(t_stack *stack_a)
+void	*sort(t_stack *stack_a)
 {
-	t_frame f;
-	int	hash_bit;
-	int max_bit;
-	
+	t_frame	f;
+	int		hash_bit;
+	int		max_bit;
+
 	f.st_a = stack_a;
 	f.a_to_sort = ft_lstsize(stack_a);
 	f.st_b = NULL;
@@ -325,16 +318,11 @@ t_cmdlist	*sort(t_stack *stack_a)
 	{
 		while (f.a_to_sort-- > 0)
 			radix_sort_el(&f, 'a', hash_bit);
+		f.b_to_sort = ft_lstsize(f.st_b);
 		while (f.b_to_sort-- > 0)
-			radix_sort_el(&f, 'b', hash_bit);
+			p(&f, 'b');
 		hash_bit++;
 		f.a_to_sort = ft_lstsize(f.st_a);
-		f.b_to_sort = ft_lstsize(f.st_b);
-	}
-	while (f.b_to_sort-- > 0)
-	{
-		p(&f, 'b');
-		r(&f, 'a');
 	}
 /* 	ft_printf("----STACK A-----\n");
 	print_stack(f.st_a);
@@ -349,22 +337,15 @@ void	free_stack(t_stack *s)
 	(void) s;
 }
 
-void	free_cmdlist(t_cmdlist *c)
-{
-	//TODO: free cmdlist
-	(void) c;
-}
-
 int	main(int argc, char **argv)
 {
-	t_stack	*input_stack;
-	t_cmdlist *cmds;
-	
+	t_stack		*input_stack;
+
 	if (argc == 2)
 		input_stack = parse_string(argv[1]);
 	if (argc > 2)
 		input_stack = parse_args(argc - 1, ++argv);
-	if(!input_stack)
+	if (!input_stack)
 		return (1);
 	if (has_duplicates(input_stack))
 	{
@@ -372,13 +353,6 @@ int	main(int argc, char **argv)
 		free_stack(input_stack);
 		return (1);
 	}
- 	cmds = sort(input_stack);
-
-	 // TEST PRINT
-	if(!cmds)
-		return(1);
-	ft_printf("%s", cmds->cmd_str);
 	free_stack(input_stack);
-	free_cmdlist(cmds);
 	return (0);
 }

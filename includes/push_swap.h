@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:25:00 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/12 09:54:23 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/13 20:04:58 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,7 @@ typedef struct s_stack_el
 	int	hash;
 }		t_stack_el;
 
-typedef t_list t_stack;
-
-typedef struct s_cmdlist
-{
-	int		count;
-	char	*cmd_str;
-}			t_cmdlist;
+typedef t_list	t_stack;
 
 typedef struct s_frame
 {
@@ -42,7 +36,6 @@ typedef struct s_frame
 	int			a_to_sort;
 	t_stack		*st_b;
 	int			b_to_sort;
-	t_cmdlist	*cmds;
 }				t_frame;
 
 /*PUSH_SWAP COMMANDS*/
