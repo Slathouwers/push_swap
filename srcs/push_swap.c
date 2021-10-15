@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 09:48:20 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 11:09:08 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,6 @@ t_stack_el	*new_stack_el(int number)
 		return (NULL);
 	el->number = number;
 	return (el);
-}
-
-void	print_stack_el(void *el)
-{
-	int	hash;
-
-	hash = TO_EL_PTR(el)->hash;
-	if (el)
-		ft_printf("num: %12i\thash: %3i\tBinary:%i%i%i%i\n",
-			TO_EL_PTR(el)->number, TO_EL_PTR(el)->hash,
-			get_bit(hash, 3), get_bit(hash, 2),
-			get_bit(hash, 1), get_bit(hash, 0));
-}
-
-void	print_stack(t_stack *s)
-{
-	ft_lstiter(s, &print_stack_el);
 }
 
 t_stack	*parse_args(int argc, char **args)
@@ -158,15 +141,6 @@ int	idx_from_arr(int *arr, int n, int to_find)
 	while (++i < n && arr[i] != to_find)
 		;
 	return (i);
-}
-
-void print_arr(int *arr, int n)
-{
-	int	i;
-
-	i = -1;
-	while (++i < n)
-		ft_printf("%i: %i\n", i, arr[i]);
 }
 
 void	hash_el_to_index(t_stack *s)
@@ -334,14 +308,6 @@ int	max_hash_bit(int max_hash)
 	return (len);
 }
 
-void	print_stacks(t_frame *f)
-{
-	ft_printf("----STACK A-----\n");
-	print_stack(f->st_a);
-	ft_printf("----STACK B-----\n");
-	print_stack(f->st_b);
-}
-
 t_stack	*sort(t_stack *stack_a)
 {
 	t_frame	f;
@@ -384,7 +350,7 @@ int	main(int argc, char **argv)
 	if (has_duplicates(input_stack))
 	{
 		ft_printf("ERROR: Duplicate numbers not allowed!\n");
-		free_stack(input_stack);
+		ft_lstclear(&input_stack, &free);
 		return (1);
 	}
 	if (!is_sorted(input_stack))

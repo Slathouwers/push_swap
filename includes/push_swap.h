@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:25:00 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/13 20:04:58 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 11:08:08 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,11 @@ typedef struct s_frame
 /*PUSH_SWAP COMMANDS*/
 
 /*SORTING FUNCTIONS*/
+
+/*PRINTING FUNCTIONS*/
+void	print_stack_el(void *el);
+void	print_stack(t_stack *s);
+void	print_arr(int *arr, int n);
+void	print_stacks(t_frame *f);
 
 #endif
