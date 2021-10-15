@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:25:00 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 11:54:10 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 12:00:22 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ t_stack_el	*new_stack_el(int number);
 t_stack		*parse_args(int argc, char **args);
 t_stack		*parse_string(char *args);
 /*PUSH_SWAP COMMANDS*/
+	/*ROTATION*/
+t_stack		*rotate(t_stack *s);
+void		r(t_frame *f, char c);
+t_stack		*rev_rotate(t_stack *s);
+void		rr(t_frame *f, char c);
+	/*PUSH*/
 
 /*SORTING FUNCTIONS*/
 

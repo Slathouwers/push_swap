@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 11:56:43 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 12:01:55 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,57 +41,6 @@ int	is_sorted(t_stack *s)
 		s = s->next;
 	}
 	return (1);
-}
-
-t_stack	*rotate(t_stack *s)
-{
-	t_stack	*tmp;
-
-	if (!s || !s->next)
-		return (s);
-	tmp = s;
-	s = tmp->next;
-	tmp->next = NULL;
-	ft_lstlast(s)->next = tmp;
-	return (s);
-}
-
-void	r(t_frame *f, char c)
-{
-	if (c == 'a')
-		f->st_a = rotate(f->st_a);
-	else
-		f->st_b = rotate(f->st_b);
-	ft_printf("r%c\n", c);
-}
-
-t_stack	*rev_rotate(t_stack *s)
-{
-	t_stack	*first;
-	t_stack	*last;
-	t_stack	*sec_to_last;
-
-	if (!s || !s->next)
-		return (s);
-	first = s;
-	while (s && s->next)
-	{
-		sec_to_last = s;
-		last = s->next;
-		s = s->next;
-	}
-	sec_to_last->next = NULL;
-	last->next = first;
-	return (last);
-}
-
-void	rr(t_frame *f, char c)
-{
-	if (c == 'a')
-		f->st_a = rev_rotate(f->st_a);
-	else
-		f->st_b = rev_rotate(f->st_b);
-	ft_printf("rr%c\n", c);
 }
 
 void	push(t_stack **from, t_stack **to)
@@ -181,12 +130,12 @@ void	radix_sort(t_frame *f)
 	{
 		while (f->a_to_sort > 0)
 		{
-			radix_sort_el(&f, 'a', hash_bit);
+			radix_sort_el(f, 'a', hash_bit);
 			f->a_to_sort--;
 		}
 		f->b_to_sort = ft_lstsize(f->st_b);
 		while (f->b_to_sort-- > 0)
-			p(&f, 'b');
+			p(f, 'b');
 		hash_bit++;
 		f->a_to_sort = ft_lstsize(f->st_a);
 	}
