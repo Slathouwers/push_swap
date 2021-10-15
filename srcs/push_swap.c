@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/13 20:05:52 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 07:31:09 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,30 @@ void	p(t_frame *f, char c)
 	ft_printf("p%c\n", c);
 }
 
+int	is_stack_bit_sorted(t_frame *f, int bit, int hash_bit)
+{
+	int		remaining;
+	t_stack	*s;
+	int		max_bit;
+	int		curr_bit;
+
+	if (!f->st_a || !f->st_a->next || f->a_to_sort < 1)
+		return (1);
+	s = f->st_a->next;
+	remaining = f->a_to_sort;
+	max_bit = bit;
+	while (s && s->next && remaining--)
+	{
+		curr_bit = get_bit(S_EL_HASH(s), hash_bit);
+		if (curr_bit < max_bit)
+			return (0);
+		else
+			max_bit = curr_bit;
+		s = s->next;
+	}
+	return (1);
+}
+
 void	radix_sort_el(t_frame *f, char from_stack, int hash_bit)
 {
 	int		bit;
@@ -282,9 +306,9 @@ void	radix_sort_el(t_frame *f, char from_stack, int hash_bit)
 		bit = get_bit(S_EL_HASH(f->st_a), hash_bit);
 	else
 		bit = get_bit(S_EL_HASH(f->st_b), hash_bit);
-	if (bit == 0)
+	if (bit == 0 && !is_stack_bit_sorted(f, bit, hash_bit))
 		p(f, from_stack);
-	else
+	else if (!is_stack_bit_sorted(f, bit, hash_bit))
 		r(f, from_stack);
 }
 
@@ -301,7 +325,7 @@ int	max_hash_bit(int max_hash)
 	return (len);
 }
 
-void	*sort(t_stack *stack_a)
+void	sort(t_stack *stack_a)
 {
 	t_frame	f;
 	int		hash_bit;
@@ -328,7 +352,6 @@ void	*sort(t_stack *stack_a)
 	print_stack(f.st_a);
 	ft_printf("----STACK B-----\n");
 	print_stack(f.st_b); */
-	return (NULL);
 }
 
 void	free_stack(t_stack *s)
@@ -353,6 +376,7 @@ int	main(int argc, char **argv)
 		free_stack(input_stack);
 		return (1);
 	}
+	sort(input_stack);
 	free_stack(input_stack);
 	return (0);
 }
