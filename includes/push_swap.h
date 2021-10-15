@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:25:00 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 11:08:08 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 11:46:15 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ typedef struct s_frame
 /*PUSH_SWAP COMMANDS*/
 
 /*SORTING FUNCTIONS*/
+
+/*RADIX UTILS*/
+int		get_bit(int number, int significance);
+void	swap(int *a, int *b);
+void	selection_sort(int *arr, int n);
+int		idx_from_arr(int *arr, int n, int to_find);
+void	hash_el_to_index(t_stack *s);
 
 /*PRINTING FUNCTIONS*/
 void	print_stack_el(void *el);
