@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 11:49:48 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 11:52:04 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 12:05:17 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_is_args_num(int argc, char **args)
 {
-	//TODO: implementP
+	//TODO: implement
 	(void) argc, (void) args;
 	return (1);
 }
