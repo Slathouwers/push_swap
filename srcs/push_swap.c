@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 12:01:55 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 12:04:29 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,6 @@ int	is_sorted(t_stack *s)
 		s = s->next;
 	}
 	return (1);
-}
-
-void	push(t_stack **from, t_stack **to)
-{
-	t_stack	*f;
-	t_stack	*t;
-	t_stack	*tmp;
-
-	f = (*from)->next;
-	tmp = *from;
-	tmp->next = *to;
-	t = tmp;
-	*from = f;
-	*to = t;
-}
-
-void	p(t_frame *f, char c)
-{
-	if (c == 'a')
-		push(&(f->st_a), &(f->st_b));
-	else
-		push(&(f->st_b), &(f->st_a));
-	if (c == 'a')
-		c = 'b';
-	else
-		c = 'a';
-	ft_printf("p%c\n", c);
 }
 
 int	is_stack_bit_sorted(t_frame *f, int hash_bit)

@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:25:00 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 12:00:22 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 12:04:24 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void		r(t_frame *f, char c);
 t_stack		*rev_rotate(t_stack *s);
 void		rr(t_frame *f, char c);
 	/*PUSH*/
+void		push(t_stack **from, t_stack **to);
+void		p(t_frame *f, char c);
 
 /*SORTING FUNCTIONS*/
 
