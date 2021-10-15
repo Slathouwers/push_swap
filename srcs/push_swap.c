@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 07:31:09 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 09:48:20 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_stack	*parse_args(int argc, char **args)
 t_stack	*parse_string(char *args)
 {
 	char	**numbers;
+	char	**curr_number_ptr;
 	int		len;
 	t_stack	*stack;
 
@@ -92,7 +93,13 @@ t_stack	*parse_string(char *args)
 		return (NULL);
 	len = split_len(numbers);
 	stack = parse_args(len, numbers);
-	ft_free_split(numbers);
+	curr_number_ptr = numbers;
+	while (*curr_number_ptr)
+	{
+		free(*curr_number_ptr);
+		curr_number_ptr++;
+	}
+	free(numbers);
 	return (stack);
 }
 
@@ -187,6 +194,7 @@ void	hash_el_to_index(t_stack *s)
 		S_EL_HASH(iter_ptr) = idx_from_arr(numbers, n, S_EL_NUMBER(iter_ptr));
 		iter_ptr = iter_ptr->next;
 	}
+	free(numbers);
 }
 
 int	is_sorted(t_stack *s)
@@ -271,29 +279,30 @@ void	p(t_frame *f, char c)
 		push(&(f->st_a), &(f->st_b));
 	else
 		push(&(f->st_b), &(f->st_a));
+	if (c == 'a')
+		c = 'b';
+	else
+		c = 'a';
 	ft_printf("p%c\n", c);
 }
 
-int	is_stack_bit_sorted(t_frame *f, int bit, int hash_bit)
+int	is_stack_bit_sorted(t_frame *f, int hash_bit)
 {
 	int		remaining;
 	t_stack	*s;
-	int		max_bit;
 	int		curr_bit;
 
-	if (!f->st_a || !f->st_a->next || f->a_to_sort < 1)
-		return (1);
-	s = f->st_a->next;
+	s = f->st_a;
 	remaining = f->a_to_sort;
-	max_bit = bit;
-	while (s && s->next && remaining--)
+	while (s && remaining-- > 0)
 	{
 		curr_bit = get_bit(S_EL_HASH(s), hash_bit);
-		if (curr_bit < max_bit)
+		if (curr_bit != 0)
 			return (0);
+		if (s->next)
+			s = s->next;
 		else
-			max_bit = curr_bit;
-		s = s->next;
+			break ;
 	}
 	return (1);
 }
@@ -306,9 +315,9 @@ void	radix_sort_el(t_frame *f, char from_stack, int hash_bit)
 		bit = get_bit(S_EL_HASH(f->st_a), hash_bit);
 	else
 		bit = get_bit(S_EL_HASH(f->st_b), hash_bit);
-	if (bit == 0 && !is_stack_bit_sorted(f, bit, hash_bit))
+	if (bit == 0 && !is_stack_bit_sorted(f, hash_bit))
 		p(f, from_stack);
-	else if (!is_stack_bit_sorted(f, bit, hash_bit))
+	else if (bit == 1 && ft_lstsize(f->st_a) > 1)
 		r(f, from_stack);
 }
 
@@ -325,7 +334,15 @@ int	max_hash_bit(int max_hash)
 	return (len);
 }
 
-void	sort(t_stack *stack_a)
+void	print_stacks(t_frame *f)
+{
+	ft_printf("----STACK A-----\n");
+	print_stack(f->st_a);
+	ft_printf("----STACK B-----\n");
+	print_stack(f->st_b);
+}
+
+t_stack	*sort(t_stack *stack_a)
 {
 	t_frame	f;
 	int		hash_bit;
@@ -340,24 +357,18 @@ void	sort(t_stack *stack_a)
 	hash_el_to_index(stack_a);
 	while (hash_bit < max_bit)
 	{
-		while (f.a_to_sort-- > 0)
+		while (f.a_to_sort > 0)
+		{
 			radix_sort_el(&f, 'a', hash_bit);
+			f.a_to_sort--;
+		}
 		f.b_to_sort = ft_lstsize(f.st_b);
 		while (f.b_to_sort-- > 0)
 			p(&f, 'b');
 		hash_bit++;
 		f.a_to_sort = ft_lstsize(f.st_a);
 	}
-/* 	ft_printf("----STACK A-----\n");
-	print_stack(f.st_a);
-	ft_printf("----STACK B-----\n");
-	print_stack(f.st_b); */
-}
-
-void	free_stack(t_stack *s)
-{
-	//TODO: free stack
-	(void) s;
+	return (f.st_a);
 }
 
 int	main(int argc, char **argv)
@@ -376,7 +387,8 @@ int	main(int argc, char **argv)
 		free_stack(input_stack);
 		return (1);
 	}
-	sort(input_stack);
-	free_stack(input_stack);
+	if (!is_sorted(input_stack))
+		input_stack = sort(input_stack);
+	ft_lstclear(&input_stack, &free);
 	return (0);
 }
