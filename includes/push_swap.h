@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:25:00 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 12:07:39 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/15 12:11:40 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void		push(t_stack **from, t_stack **to);
 void		p(t_frame *f, char c);
 
 /*SORTING FUNCTIONS*/
+void		radix_sort(t_frame *f);
 
 /* RADIX_SORT*/
 int			is_stack_bit_sorted(t_frame *f, int hash_bit);
 void		radix_sort_el(t_frame *f, char from_stack, int hash_bit);
 int			max_hash_bit(int max_hash);
-void		radix_sort(t_frame *f);
 
 /*RADIX UTILS*/
 int			get_bit(int number, int significance);
