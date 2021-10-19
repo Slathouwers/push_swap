@@ -6,16 +6,20 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 11:49:48 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 12:05:17 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/19 06:58:19 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	check_is_args_num(int argc, char **args)
+int	check_is_args_int(int argc, char **args)
 {
-	//TODO: implement
-	(void) argc, (void) args;
+	while (argc-- > 0)
+	{
+		if (!ft_isnbr(*args) || !ft_isint(*args))
+			return (0);
+		args++;
+	}
 	return (1);
 }
 
@@ -48,7 +52,7 @@ t_stack	*parse_args(int argc, char **args)
 	int			number;
 
 	stack = NULL;
-	if (!check_is_args_num(argc, args))
+	if (!check_is_args_int(argc, args))
 		return (NULL);
 	while (*args && argc-- > 0)
 	{

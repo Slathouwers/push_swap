@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 12:06:30 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 12:06:42 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/19 07:15:57 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,17 @@ int	max_hash_bit(int max_hash)
 	return (len);
 }
 
+int	is_sorted(t_stack *s)
+{
+	while (s && s->next)
+	{
+		if (S_EL_HASH(s) > S_EL_HASH(s->next))
+			return (0);
+		s = s->next;
+	}
+	return (1);
+}
+
 void	radix_sort(t_frame *f)
 {
 	int	hash_bit;
@@ -68,17 +79,20 @@ void	radix_sort(t_frame *f)
 	hash_bit = 0;
 	max_bit = max_hash_bit(f->a_to_sort);
 	hash_el_to_index(f->st_a);
-	while (hash_bit < max_bit)
+	if (!is_sorted(f->st_a))
 	{
-		while (f->a_to_sort > 0)
+		while (hash_bit < max_bit)
 		{
-			radix_sort_el(f, 'a', hash_bit);
-			f->a_to_sort--;
+			while (f->a_to_sort > 0)
+			{
+				radix_sort_el(f, 'a', hash_bit);
+				f->a_to_sort--;
+			}
+			f->b_to_sort = ft_lstsize(f->st_b);
+			while (f->b_to_sort-- > 0)
+				p(f, 'b');
+			hash_bit++;
+			f->a_to_sort = ft_lstsize(f->st_a);
 		}
-		f->b_to_sort = ft_lstsize(f->st_b);
-		while (f->b_to_sort-- > 0)
-			p(f, 'b');
-		hash_bit++;
-		f->a_to_sort = ft_lstsize(f->st_a);
 	}
 }

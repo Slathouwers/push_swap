@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 12:06:36 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/19 07:16:03 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,6 @@ int	has_duplicates(t_stack *stack)
 	return (0);
 }
 
-int	is_sorted(t_stack *s)
-{
-	while (s && s->next)
-	{
-		if (S_EL_HASH(s) > S_EL_HASH(s->next))
-			return (0);
-		s = s->next;
-	}
-	return (1);
-}
-
 t_stack	*sort(t_stack *stack_a)
 {
 	t_frame	f;
@@ -64,15 +53,17 @@ int	main(int argc, char **argv)
 	if (argc > 2)
 		input_stack = parse_args(argc - 1, ++argv);
 	if (!input_stack)
+	{
+		ft_printf("Error\n");
 		return (1);
+	}
 	if (has_duplicates(input_stack))
 	{
-		ft_printf("ERROR: Duplicate numbers not allowed!\n");
+		ft_printf("Error\n");
 		ft_lstclear(&input_stack, &free);
 		return (1);
 	}
-	if (!is_sorted(input_stack))
-		input_stack = sort(input_stack);
+	input_stack = sort(input_stack);
 	ft_lstclear(&input_stack, &free);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:25:00 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 12:11:40 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/19 07:01:19 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ int			split_len(char **split);
 t_stack_el	*new_stack_el(int number);
 t_stack		*parse_args(int argc, char **args);
 t_stack		*parse_string(char *args);
+
+/*PARSING UTILS*/
+int			ft_isnbr(char *str);
+int			ft_isint(const char *str);
+
 /*PUSH_SWAP COMMANDS*/
 	/*ROTATION*/
 t_stack		*rotate(t_stack *s);
