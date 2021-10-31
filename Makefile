@@ -6,7 +6,7 @@
 #    By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 14:26:03 by slathouw          #+#    #+#              #
-#    Updated: 2021/10/19 07:01:10 by slathouw         ###   ########.fr        #
+#    Updated: 2021/10/31 06:30:13 by slathouw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ OBJDIR	= obj
 
 
 SOURCES	= push_swap.c print.c radix_utils.c parsing.c \
-		  rotate.c push.c radix_sort.c parsing_utils.c
+		  rotate.c push.c radix_sort.c parsing_utils.c \
+		  swap.c ptr_conversions.c
 SRCDIR 	= srcs
 SRCS 	= ${addprefix $(SRCDIR)/, $(SOURCES)}
 OBJS	= ${addprefix $(OBJDIR)/, $(SOURCES:.c=.o)}
