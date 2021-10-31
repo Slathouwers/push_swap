@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 12:06:30 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/19 07:15:57 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/31 06:23:19 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	is_stack_bit_sorted(t_frame *f, int hash_bit)
 	remaining = f->a_to_sort;
 	while (s && remaining-- > 0)
 	{
-		curr_bit = get_bit(S_EL_HASH(s), hash_bit);
+		curr_bit = get_bit(s_el_hash(s), hash_bit);
 		if (curr_bit != 0)
 			return (0);
 		if (s->next)
@@ -38,9 +38,9 @@ void	radix_sort_el(t_frame *f, char from_stack, int hash_bit)
 	int		bit;
 
 	if (from_stack == 'a')
-		bit = get_bit(S_EL_HASH(f->st_a), hash_bit);
+		bit = get_bit(s_el_hash(f->st_a), hash_bit);
 	else
-		bit = get_bit(S_EL_HASH(f->st_b), hash_bit);
+		bit = get_bit(s_el_hash(f->st_b), hash_bit);
 	if (bit == 0 && !is_stack_bit_sorted(f, hash_bit))
 		p(f, from_stack);
 	else if (bit == 1 && ft_lstsize(f->st_a) > 1)
@@ -64,7 +64,7 @@ int	is_sorted(t_stack *s)
 {
 	while (s && s->next)
 	{
-		if (S_EL_HASH(s) > S_EL_HASH(s->next))
+		if (s_el_hash(s) > s_el_hash(s->next))
 			return (0);
 		s = s->next;
 	}
