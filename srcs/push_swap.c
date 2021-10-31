@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/19 07:16:03 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/31 06:22:31 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	has_duplicates(t_stack *stack)
 		j = i->next;
 		while (j)
 		{
-			if (S_EL_NUMBER(i) == S_EL_NUMBER(j))
+			if (s_el_number(i) == s_el_number(j))
 				return (1);
 			j = j->next;
 		}
@@ -40,7 +40,10 @@ t_stack	*sort(t_stack *stack_a)
 	f.a_to_sort = ft_lstsize(stack_a);
 	f.st_b = NULL;
 	f.b_to_sort = 0;
-	radix_sort(&f);
+	if (f.a_to_sort < 6)
+		small_sort(&f);
+	else
+		radix_sort(&f);
 	return (f.st_a);
 }
 
