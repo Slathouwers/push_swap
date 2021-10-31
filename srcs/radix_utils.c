@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 11:44:17 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 11:46:22 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/31 06:25:45 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_bit(int number, int significance)
 	return (number >> significance & 1);
 }
 
-void	swap(int *a, int *b)
+void	ft_swap(int *a, int *b)
 {
 	int	tmp;
 
@@ -40,7 +40,7 @@ void	selection_sort(int *arr, int n)
 		while (++j < n)
 			if (arr[j] < arr[min_index])
 				min_index = j;
-		swap(&arr[min_index], &arr[i]);
+		ft_swap(&arr[min_index], &arr[i]);
 	}
 }
 
@@ -69,14 +69,15 @@ void	hash_el_to_index(t_stack *s)
 		return ;
 	while (iter_ptr)
 	{
-		numbers[i++] = S_EL_NUMBER(iter_ptr);
+		numbers[i++] = s_el_number(iter_ptr);
 		iter_ptr = iter_ptr->next;
 	}
 	selection_sort(numbers, n);
 	iter_ptr = s;
 	while (iter_ptr)
 	{
-		S_EL_HASH(iter_ptr) = idx_from_arr(numbers, n, S_EL_NUMBER(iter_ptr));
+		((t_stack_el *)iter_ptr->content)->hash
+			= idx_from_arr(numbers, n, s_el_number(iter_ptr));
 		iter_ptr = iter_ptr->next;
 	}
 	free(numbers);
