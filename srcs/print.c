@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 11:03:58 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/15 11:07:22 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/10/31 06:26:35 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	print_stack_el(void *el)
 {
 	int	hash;
 
-	hash = TO_EL_PTR(el)->hash;
+	hash = to_el_ptr(el)->hash;
 	if (el)
 		ft_printf("num: %12i\thash: %3i\tBinary:%i%i%i%i\n",
-			TO_EL_PTR(el)->number, TO_EL_PTR(el)->hash,
+			to_el_ptr(el)->number, to_el_ptr(el)->hash,
 			get_bit(hash, 3), get_bit(hash, 2),
 			get_bit(hash, 1), get_bit(hash, 0));
 }
