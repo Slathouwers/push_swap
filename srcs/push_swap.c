@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/31 06:40:38 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/09 14:28:40 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_stack	*sort(t_stack *stack_a)
 	f.a_to_sort = ft_lstsize(stack_a);
 	f.st_b = NULL;
 	f.b_to_sort = 0;
-	if (f.a_to_sort < 6)
+	if (f.a_to_sort < 50)
 		small_sort(&f);
 	else
 		radix_sort(&f);
