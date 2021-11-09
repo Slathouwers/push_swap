@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 06:07:48 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/09 13:38:02 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/09 13:48:17 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void	pushb_insert(t_frame *f)
 	b_hash = s_el_hash(f->st_b);
 	minimax_a = minimax(f->st_a, b_hash,
 			ft_lstsize(f->st_a) + ft_lstsize(f->st_b));
-	print_stacks(f);
-	ft_printf("----> elhash= %i | minimax_a= %i |\n", b_hash, minimax_a);
+	//print_stacks(f);
+	//ft_printf("----> elhash= %i | minimax_a= %i |\n", b_hash, minimax_a);
 	if (minimax_a == b_hash)
 	{
 		p(f, 'b');
@@ -130,6 +130,5 @@ void	small_sort(t_frame *f)
 		else
 			sort_split_triplet(f);
 	}
-	print_stacks(f);
-
+//	print_stacks(f);
 }
