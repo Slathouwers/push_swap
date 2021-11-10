@@ -6,9 +6,13 @@
 #    By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 14:26:03 by slathouw          #+#    #+#              #
-#    Updated: 2021/11/10 10:47:32 by slathouw         ###   ########.fr        #
+#    Updated: 2021/11/10 10:55:06 by slathouw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#############
+# VARIABLES #
+#############
 
 NAME 	= push_swap
 LIBFT 	= libftprintf
@@ -25,15 +29,20 @@ SRCDIR 	= srcs
 SRCS 	= ${addprefix $(SRCDIR)/, $(SOURCES)}
 OBJS	= ${addprefix $(OBJDIR)/, $(SOURCES:.c=.o)}
 
+###############
+# COMPILATION #
+###############
 
 all : 		${NAME}
 
+#PUSH_SWAP linking compilation
 $(NAME) :	$(OBJS)
 	@make -C $(LIBFT)
 	@cp libftprintf/libftprintf.a .
 	@${CC} ${CFLAGS} -I ${INCLUDES} ${OBJS} libftprintf.a -o ${NAME}
 	@echo "push_swap binary created!"
 
+#PUSH_SWAP object compilation
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p obj
 	@${CC} ${CFLAGS} -I ${INCLUDES} -c $< -o $@
@@ -45,7 +54,7 @@ clean:
 	@echo "push_swap objects removed..."
 
 fclean: clean
-	@rm -f server client libftprintf.a
+	@rm -f $(NAME) libftprintf.a
 	@make fclean -C $(LIBFT)
 	@echo "push_swap objects removed..."
 
