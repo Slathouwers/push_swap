@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:25:00 by slathouw          #+#    #+#             */
-/*   Updated: 2021/10/31 07:25:38 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/10 09:56:14 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,12 @@ void		radix_sort(t_frame *f);
 void		small_sort(t_frame *f);
 int			is_sorted(t_stack *s);
 
-/* RADIX_SORT*/
+/*SMALL_SORT UTILS*/
+
+void		rotate_to_top_a(t_frame *f, int hash);
+void		pushb_insert(t_frame *f);
+
+/* RADIX_SORT UTILS*/
 int			is_stack_bit_sorted(t_frame *f, int hash_bit);
 void		radix_sort_el(t_frame *f, char from_stack, int hash_bit);
 int			max_hash_bit(int max_hash);
