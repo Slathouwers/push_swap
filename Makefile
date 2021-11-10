@@ -6,7 +6,7 @@
 #    By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 14:26:03 by slathouw          #+#    #+#              #
-#    Updated: 2021/11/10 11:18:57 by slathouw         ###   ########.fr        #
+#    Updated: 2021/11/10 11:50:59 by slathouw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS 	= ${addprefix $(SRCDIR)/, $(SOURCES)}
 OBJS	= ${addprefix $(OBJDIR)/, $(SOURCES:.c=.o)}
 
 #CHECKER files
-CHECKSOURCES = checker.c
+CHECKSOURCES = checker.c parsing_utils.c parsing.c print.c ptr_conversions.c \
+				stack_utils.c
 CHECKSRCDIR  = srcs_checker
 CHECKSRCS 	 = ${addprefix $(CHECKSRCDIR)/, $(CHECKSOURCES)}
 CHECKOBJS	 = ${addprefix $(OBJDIR)/ch_, $(CHECKSOURCES:.c=.o)}
@@ -52,7 +53,6 @@ $(NAME) :	$(OBJS)
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p obj
 	@${CC} ${CFLAGS} -I ${INCLUDES} -c $< -o $@
-	@echo "push_swap objects compiled!"
 
 #CHECKER linking compilation
 checker:	$(CHECKOBJS)
@@ -65,7 +65,6 @@ checker:	$(CHECKOBJS)
 $(OBJDIR)/ch_%.o: $(CHECKSRCDIR)/%.c
 	@mkdir -p obj
 	@${CC} ${CFLAGS} -I ${INCLUDES} -c $< -o $@
-	@echo "checker objects compiled!"
 
 clean:
 	@rm -f $(OBJS) $(CHECKOBJS)
