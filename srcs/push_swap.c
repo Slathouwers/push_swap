@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/09 14:28:40 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/10 11:12:18 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	main(int argc, char **argv)
 		input_stack = parse_args(argc - 1, ++argv);
 	if (!input_stack)
 	{
-		ft_printf("Error\n");
+		write(2, "Error\n", 6);
 		return (1);
 	}
 	if (has_duplicates(input_stack))
 	{
-		ft_printf("Error\n");
+		write(2, "Error\n", 6);
 		ft_lstclear(&input_stack, &free);
 		return (1);
 	}
