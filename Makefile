@@ -6,7 +6,7 @@
 #    By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 14:26:03 by slathouw          #+#    #+#              #
-#    Updated: 2021/11/10 10:55:06 by slathouw         ###   ########.fr        #
+#    Updated: 2021/11/10 11:18:57 by slathouw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,13 +21,19 @@ CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
 OBJDIR	= obj
 
-
+#PUSH_SWAP files 
 SOURCES	= push_swap.c print.c radix_utils.c parsing.c \
 		  rotate.c push.c radix_sort.c parsing_utils.c \
 		  swap.c ptr_conversions.c small_sort.c small_sort_utils.c
 SRCDIR 	= srcs
 SRCS 	= ${addprefix $(SRCDIR)/, $(SOURCES)}
 OBJS	= ${addprefix $(OBJDIR)/, $(SOURCES:.c=.o)}
+
+#CHECKER files
+CHECKSOURCES = checker.c
+CHECKSRCDIR  = srcs_checker
+CHECKSRCS 	 = ${addprefix $(CHECKSRCDIR)/, $(CHECKSOURCES)}
+CHECKOBJS	 = ${addprefix $(OBJDIR)/ch_, $(CHECKSOURCES:.c=.o)}
 
 ###############
 # COMPILATION #
@@ -46,17 +52,31 @@ $(NAME) :	$(OBJS)
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p obj
 	@${CC} ${CFLAGS} -I ${INCLUDES} -c $< -o $@
+	@echo "push_swap objects compiled!"
+
+#CHECKER linking compilation
+checker:	$(CHECKOBJS)
+	@make -C $(LIBFT)
+	@cp libftprintf/libftprintf.a .
+	@${CC} ${CFLAGS} -I ${INCLUDES} ${CHECKOBJS} libftprintf.a -o checker
+	@echo "checker binary created!"
+
+#CHECKER object compilation
+$(OBJDIR)/ch_%.o: $(CHECKSRCDIR)/%.c
+	@mkdir -p obj
+	@${CC} ${CFLAGS} -I ${INCLUDES} -c $< -o $@
+	@echo "checker objects compiled!"
 
 clean:
-	@rm -f $(OBJS)
+	@rm -f $(OBJS) $(CHECKOBJS)
 	@rm -rf $(OBJDIR)
 	@make clean -C $(LIBFT)
-	@echo "push_swap objects removed..."
+	@echo "objects removed..."
 
 fclean: clean
-	@rm -f $(NAME) libftprintf.a
+	@rm -f $(NAME) checker libftprintf.a
 	@make fclean -C $(LIBFT)
-	@echo "push_swap objects removed..."
+	@echo "binaries removed..."
 
 
 re :		fclean all
