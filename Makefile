@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+         #
+#    By: slathouw <slathouw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 14:26:03 by slathouw          #+#    #+#              #
-#    Updated: 2021/11/10 11:50:59 by slathouw         ###   ########.fr        #
+#    Updated: 2021/11/11 16:42:02 by slathouw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJS	= ${addprefix $(OBJDIR)/, $(SOURCES:.c=.o)}
 
 #CHECKER files
 CHECKSOURCES = checker.c parsing_utils.c parsing.c print.c ptr_conversions.c \
-				stack_utils.c
+				stack_utils.c push.c rotate.c swap.c doublerotate.c
 CHECKSRCDIR  = srcs_checker
 CHECKSRCS 	 = ${addprefix $(CHECKSRCDIR)/, $(CHECKSOURCES)}
 CHECKOBJS	 = ${addprefix $(OBJDIR)/ch_, $(CHECKSOURCES:.c=.o)}

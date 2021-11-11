@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:01:02 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/11 13:51:24 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/11 15:53:58 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 # define CHECKER_H
 
 # include "../libftprintf/includes/ft_printf_bonus.h"
+
+# define SA "sa\n"
+# define SB "sb\n"
+# define SS "ss\n"
+# define PA "pa\n"
+# define PB "pb\n"
+# define RA "ra\n"
+# define RB "rb\n"
+# define RR "rr\n"
+# define RRA "rra\n"
+# define RRB "rrb\n"
+# define RRR "rrr\n"
 
 /*ARRAY STRUCT AND FUNCTIONS*/
 
@@ -34,6 +46,17 @@ typedef struct s_frame
 	t_stack		*st_b;
 	int			b_to_sort;
 }				t_frame;
+
+/*COMMANDS*/
+void		s(t_frame *f, char c);
+void		ss(t_frame *f);
+t_stack		*rotate(t_stack *s);
+t_stack		*rev_rotate(t_stack *s);
+void		r(t_frame *f, char c);
+void		rr(t_frame *f, char c);
+void		dr(t_frame *f);
+void		drr(t_frame *f);
+void		p(t_frame *f, char c);
 
 /*PTR_CONVERSIONS*/
 t_stack_el	*to_el_ptr(void *el);
