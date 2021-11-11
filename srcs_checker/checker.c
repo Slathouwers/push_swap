@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
+/*   By: slathouw <slathouw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:02:14 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/11 14:18:27 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/11 17:04:45 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
+/*PRINT*/
 void	print_cmdlist(t_cmds *c)
 {
 	ft_printf("COMMAND LIST =\n");
@@ -22,6 +23,54 @@ void	print_cmdlist(t_cmds *c)
 	}
 }
 
+/*RUN_CMDS*/
+void	run_cmd(char *cmd, t_frame *f)
+{
+	if (ft_strcmp(cmd, SA) == 0)
+		s(f, 'a');
+	else if (ft_strcmp(cmd, SB) == 0)
+		s(f, 'b');
+	else if (ft_strcmp(cmd, SS) == 0)
+		ss(f);
+	else if (ft_strcmp(cmd, PA) == 0)
+		p(f, 'b');
+	else if (ft_strcmp(cmd, PB) == 0)
+		p(f, 'a');
+	else if (ft_strcmp(cmd, RA) == 0)
+		r(f, 'a');
+	else if (ft_strcmp(cmd, RB) == 0)
+		r(f, 'b');
+	else if (ft_strcmp(cmd, RR) == 0)
+		dr(f);
+	else if (ft_strcmp(cmd, RRA) == 0)
+		rr(f, 'a');
+	else if (ft_strcmp(cmd, RRB) == 0)
+		rr(f, 'b');
+	else if (ft_strcmp(cmd, RRR) == 0)
+		drr(f);
+}
+
+t_stack	*run_cmdslst(t_stack *sa, t_cmds *c)
+{
+	t_frame	f;
+
+	f.st_a = sa;
+	f.a_to_sort = ft_lstsize(sa);
+	f.st_b = NULL;
+	f.b_to_sort = 0;
+	while (c)
+	{
+		run_cmd((char *)c->content, &f);
+		c = c->next;
+	}
+	print_stacks(&f);
+	if (f.st_b)
+		ft_lstclear(&f.st_b, &free);
+	sa = f.st_a;
+	return (sa);
+}
+
+/*PARSE CMDS*/
 int	ft_is_in(char *s, char **s_arr)
 {
 	while (*s_arr)
@@ -59,7 +108,6 @@ t_cmds	*parse_cmds(void)
 		ft_lstadd_back(&cmds, ft_lstnew(line));
 		line = get_next_line(0);
 	}
-	print_cmdlist(cmds);
 	if (!check_cmds(cmds))
 	{
 		ft_lstclear(&cmds, &free);
@@ -68,6 +116,7 @@ t_cmds	*parse_cmds(void)
 	return (cmds);
 }
 
+/*MAIN*/
 void	exit_error(t_stack *s_to_free, t_cmds *c_to_free)
 {
 	if (s_to_free)
@@ -96,7 +145,7 @@ int	main(int argc, char **argv)
 	cmd_list = parse_cmds();
 	if (!cmd_list)
 		exit_error(input_stack, NULL);
-	//input_stack = run_cmdslst(input_stack, cmd_list); //TODO: run cmdlist on frame
+	input_stack = run_cmdslst(input_stack, cmd_list);
 	if (is_len == ft_lstsize(input_stack) && is_sorted(input_stack))
 		write(1, "OK\n", 3);
 	else
