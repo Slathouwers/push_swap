@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:02:14 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/11 13:20:49 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/11 14:15:21 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,31 @@ void	print_cmdlist(t_cmds *c)
 	}
 }
 
+int	ft_is_in(char *s, char **s_arr)
+{
+	while (*s_arr)
+	{
+		if (ft_strcmp(s, *s_arr) == 0)
+			return (1);
+		s_arr++;
+	}
+	return (0);
+}
+
+int	check_cmds(t_cmds *c)
+{
+	const char	*valid[] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n"
+		, "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n", 0};
+
+	while (c)
+	{
+		if (!ft_is_in((char *) c->content, valid))
+			return (0);
+		c = c->next;
+	}
+	return (1);
+}
+
 t_cmds	*parse_cmds(void)
 {
 	t_cmds	*cmds;
@@ -35,7 +60,11 @@ t_cmds	*parse_cmds(void)
 		line = get_next_line(0);
 	}
 	print_cmdlist(cmds);
-	//TODO: Write parsing routines to parse cmdlist and check for formatting
+	if (!check_cmds(cmds))
+	{
+		ft_lstclear(&cmds, &free);
+		cmds = NULL;
+	}
 	return (cmds);
 }
 
