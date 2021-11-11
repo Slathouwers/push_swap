@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:02:14 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/11 14:15:21 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/11 14:18:27 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_cmds(t_cmds *c)
 
 	while (c)
 	{
-		if (!ft_is_in((char *) c->content, valid))
+		if (!ft_is_in((char *) c->content, (char **) valid))
 			return (0);
 		c = c->next;
 	}
