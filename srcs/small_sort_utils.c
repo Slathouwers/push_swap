@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 09:53:46 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/10 10:34:10 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/12 09:46:54 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	rotate_to_top_a(t_frame *f, int hash)
 
 	s = f->st_a;
 	el_idx = 0;
-	while (s->next && s_el_hash(s) != hash)
+	while (s && s_el_hash(s) != hash)
 	{
 		s = s->next;
 		el_idx++;
