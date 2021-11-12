@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 09:31:52 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/12 09:33:08 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/12 10:03:27 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_cmds(t_cmds *c)
 	return (1);
 }
 
-t_cmds	*parse_cmds(void)
+t_cmds	*parse_cmds(int *cmd_count)
 {
 	t_cmds	*cmds;
 	char	*line;
@@ -49,6 +49,7 @@ t_cmds	*parse_cmds(void)
 		ft_lstadd_back(&cmds, ft_lstnew(line));
 		line = get_next_line(0);
 	}
+	*cmd_count = ft_lstsize(cmds);
 	if (!check_cmds(cmds))
 	{
 		ft_lstclear(&cmds, &free);
