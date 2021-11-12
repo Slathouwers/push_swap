@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:02:14 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/12 09:32:19 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/12 09:58:57 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	main(int argc, char **argv)
 	t_stack		*input_stack;
 	int			is_len;
 	t_cmds		*cmd_list;
+	int			cmd_len;
 
+	if (argc < 2)
+		return (0);
 	if (argc == 2)
 		input_stack = parse_string(argv[1]);
 	if (argc > 2)
@@ -38,8 +41,8 @@ int	main(int argc, char **argv)
 	if (has_duplicates(input_stack))
 		exit_error(input_stack, NULL);
 	is_len = ft_lstsize(input_stack);
-	cmd_list = parse_cmds();
-	if (!cmd_list)
+	cmd_list = parse_cmds(&cmd_len);
+	if (cmd_len != ft_lstsize(cmd_list))
 		exit_error(input_stack, NULL);
 	input_stack = run_cmdslst(input_stack, cmd_list);
 	if (is_len == ft_lstsize(input_stack) && is_sorted(input_stack))
