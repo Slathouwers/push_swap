@@ -6,57 +6,11 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:02:14 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/12 09:29:57 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/12 09:32:19 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
-
-/*PARSE CMDS*/
-int	ft_is_in(char *s, char **s_arr)
-{
-	while (*s_arr)
-	{
-		if (ft_strcmp(s, *s_arr) == 0)
-			return (1);
-		s_arr++;
-	}
-	return (0);
-}
-
-int	check_cmds(t_cmds *c)
-{
-	const char	*valid[] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n"
-		, "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n", 0};
-
-	while (c)
-	{
-		if (!ft_is_in((char *) c->content, (char **) valid))
-			return (0);
-		c = c->next;
-	}
-	return (1);
-}
-
-t_cmds	*parse_cmds(void)
-{
-	t_cmds	*cmds;
-	char	*line;
-
-	cmds = NULL;
-	line = get_next_line(0);
-	while (line)
-	{
-		ft_lstadd_back(&cmds, ft_lstnew(line));
-		line = get_next_line(0);
-	}
-	if (!check_cmds(cmds))
-	{
-		ft_lstclear(&cmds, &free);
-		cmds = NULL;
-	}
-	return (cmds);
-}
 
 /*MAIN*/
 void	exit_error(t_stack *s_to_free, t_cmds *c_to_free)

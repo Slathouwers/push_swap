@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:01:02 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/12 09:30:24 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/12 09:33:00 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,10 @@ void		print_cmdlist(t_cmds *c);
 /*RUN_CMDS*/
 void		run_cmd(char *cmd, t_frame *f);
 t_stack		*run_cmdslst(t_stack *sa, t_cmds *c);
+
+/*PARSE CMDS*/
+int			ft_is_in(char *s, char **s_arr);
+int			check_cmds(t_cmds *c);
+t_cmds		*parse_cmds(void);
 
 #endif

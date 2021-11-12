@@ -6,7 +6,7 @@
 #    By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 14:26:03 by slathouw          #+#    #+#              #
-#    Updated: 2021/11/12 09:30:49 by slathouw         ###   ########.fr        #
+#    Updated: 2021/11/12 09:34:49 by slathouw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ OBJS	= ${addprefix $(OBJDIR)/, $(SOURCES:.c=.o)}
 
 #CHECKER files
 CHECKSOURCES = checker.c parsing_utils.c parsing.c print.c ptr_conversions.c \
-				stack_utils.c push.c rotate.c swap.c doublerotate.c run_cmds.c
+				stack_utils.c push.c rotate.c swap.c doublerotate.c run_cmds.c \
+				parse_cmds.c
 CHECKSRCDIR  = srcs_checker
 CHECKSRCS 	 = ${addprefix $(CHECKSRCDIR)/, $(CHECKSOURCES)}
 CHECKOBJS	 = ${addprefix $(OBJDIR)/ch_, $(CHECKSOURCES:.c=.o)}
