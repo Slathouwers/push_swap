@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slathouw <slathouw@student.42.fr>          +#+  +:+       +#+        */
+/*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:02:14 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/11 17:04:45 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/12 09:28:17 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
-
-/*PRINT*/
-void	print_cmdlist(t_cmds *c)
-{
-	ft_printf("COMMAND LIST =\n");
-	while (c)
-	{
-		ft_printf("%s", (char *)c->content);
-		c = c->next;
-	}
-}
 
 /*RUN_CMDS*/
 void	run_cmd(char *cmd, t_frame *f)

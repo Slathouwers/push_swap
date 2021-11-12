@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 11:03:58 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/10 11:41:34 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/12 09:28:09 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,14 @@ void	print_arr(int *arr, int n)
 	i = -1;
 	while (++i < n)
 		ft_printf("%i: %i\n", i, arr[i]);
+}
+
+void	print_cmdlist(t_cmds *c)
+{
+	ft_printf("COMMAND LIST =\n");
+	while (c)
+	{
+		ft_printf("%s", (char *)c->content);
+		c = c->next;
+	}
 }

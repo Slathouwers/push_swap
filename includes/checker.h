@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:01:02 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/11 15:53:58 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/12 09:27:12 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ void		print_stack_el(void *el);
 void		print_stack(t_stack *s);
 void		print_arr(int *arr, int n);
 void		print_stacks(t_frame *f);
+void		print_cmdlist(t_cmds *c);
 
 #endif
