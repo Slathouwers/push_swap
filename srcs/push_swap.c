@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 09:57:09 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/10 11:12:18 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/12 09:39:15 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	main(int argc, char **argv)
 {
 	t_stack		*input_stack;
 
+	if (argc < 2)
+		return (0);
 	if (argc == 2)
 		input_stack = parse_string(argv[1]);
 	if (argc > 2)
