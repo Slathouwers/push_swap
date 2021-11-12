@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 09:28:42 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/12 09:29:46 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/11/12 10:04:21 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ t_stack	*run_cmdslst(t_stack *sa, t_cmds *c)
 		run_cmd((char *)c->content, &f);
 		c = c->next;
 	}
-	print_stacks(&f);
 	if (f.st_b)
 		ft_lstclear(&f.st_b, &free);
 	sa = f.st_a;
