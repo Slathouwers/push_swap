@@ -6,7 +6,7 @@
 /*   By: slathouw <slathouw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:02:14 by slathouw          #+#    #+#             */
-/*   Updated: 2021/12/13 09:55:55 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/12/13 11:20:21 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ int	main(int argc, char **argv)
 		write(1, "KO\n", 3);
 	ft_lstclear(&input_stack, &free);
 	ft_lstclear(&cmd_list, &free);
-	system("leaks checker");
 	return (0);
 }
