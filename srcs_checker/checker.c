@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
+/*   By: slathouw <slathouw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 11:02:14 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/12 09:58:57 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/12/13 09:55:55 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ void	exit_error(t_stack *s_to_free, t_cmds *c_to_free)
 	exit(EXIT_FAILURE);
 }
 
+void	check_input_stack(t_stack *is)
+{
+	if (!is)
+		exit_error(NULL, NULL);
+	if (has_duplicates(is))
+		exit_error(is, NULL);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack		*input_stack;
@@ -36,10 +44,7 @@ int	main(int argc, char **argv)
 		input_stack = parse_string(argv[1]);
 	if (argc > 2)
 		input_stack = parse_args(argc - 1, ++argv);
-	if (!input_stack)
-		exit_error(NULL, NULL);
-	if (has_duplicates(input_stack))
-		exit_error(input_stack, NULL);
+	check_input_stack(input_stack);
 	is_len = ft_lstsize(input_stack);
 	cmd_list = parse_cmds(&cmd_len);
 	if (cmd_len != ft_lstsize(cmd_list))
@@ -51,5 +56,6 @@ int	main(int argc, char **argv)
 		write(1, "KO\n", 3);
 	ft_lstclear(&input_stack, &free);
 	ft_lstclear(&cmd_list, &free);
+	system("leaks checker");
 	return (0);
 }

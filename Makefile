@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+         #
+#    By: slathouw <slathouw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/06 14:26:03 by slathouw          #+#    #+#              #
-#    Updated: 2021/11/12 09:34:49 by slathouw         ###   ########.fr        #
+#    Updated: 2021/12/13 09:58:46 by slathouw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,11 +56,13 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@${CC} ${CFLAGS} -I ${INCLUDES} -c $< -o $@
 
 #CHECKER linking compilation
-checker:	$(CHECKOBJS)
+bonus:	$(CHECKOBJS)
 	@make -C $(LIBFT)
 	@cp libftprintf/libftprintf.a .
 	@${CC} ${CFLAGS} -I ${INCLUDES} ${CHECKOBJS} libftprintf.a -o checker
 	@echo "checker binary created!"
+
+checker: bonus
 
 #CHECKER object compilation
 $(OBJDIR)/ch_%.o: $(CHECKSRCDIR)/%.c
