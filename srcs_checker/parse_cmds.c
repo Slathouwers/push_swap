@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: slathouw <slathouw@student.s19.be>         +#+  +:+       +#+        */
+/*   By: slathouw <slathouw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 09:31:52 by slathouw          #+#    #+#             */
-/*   Updated: 2021/11/12 10:03:27 by slathouw         ###   ########.fr       */
+/*   Updated: 2021/12/13 09:48:32 by slathouw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	ft_is_in(char *s, char **s_arr)
 
 int	check_cmds(t_cmds *c)
 {
-	const char	*valid[] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n"
-		, "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n", 0};
+	const char	*valid[] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n",
+		"rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n", 0};
 
 	while (c)
 	{
